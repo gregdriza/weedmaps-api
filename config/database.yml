@@ -37,12 +37,12 @@ default: &default
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: patient_api_development
 
 test:
   <<: *default
-  database: db/test.sqlite3
+  database: patient_api_test
 
 production:
   <<: *default
-  database: patient_api
+  database: patient_api_production
