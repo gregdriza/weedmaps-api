@@ -75,9 +75,11 @@ RSpec.describe IdentificationsController, type: :controller do
     describe "when the patient has more than one identification" do
       let(:payload) {
         { 
-          "expiration_date"=>"2021-10-22",
-          "id_number"=>124557574,
-          "state_issuer"=>"NY"
+          "identification": {
+            "expiration_date"=>"2021-10-22",
+            "id_number"=>124557574,
+            "state_issuer"=>"NY"
+          }
         }
       }
 

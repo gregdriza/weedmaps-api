@@ -38,11 +38,11 @@ https://weedmaps-patient-api-gregdriza.herokuapp.com/
 		 -	Throws if Patient cannot be found
  - **Identifications** 
 	-	**CREATE**- POST - **/identifications/new**
-		-	`{
+		-	`{ "identification":{
 				"expiration_date"=>"2021-10-22", 
 				"id_number"=>124557574,
 				"state_issuer"=>"NY"
-				}`
+				}}`
 				
 		 - `state_issuer` must be a valid US state initial. 
 		 - Dates must be in format `YYYY-MM-DD` (this looks like it's a quirk of rails `Date.parse()`. Given more time, I'd probably find a better way to deal with time.
@@ -66,4 +66,8 @@ https://weedmaps-patient-api-gregdriza.herokuapp.com/
  - Tests for model validations in the controller. 
  - Better coverage of the controllers. Right now mostly "happy path" is being tested. There should probably be tests that assert that these methods throw when there is an issue.
  - Poor testing of the `upload` and `get_id_image` functionality. Testing that an image ends up in the filesystem turns out to be not that easy. I'd need a little more time to figure out how to do that properly. 
- - 
+ 
+**Notes**
+
+  - Run specs with `rspec spec/controllers/identifications_controller_spec.rb` or `rspec spec/controllers/patients_controller_spec.rb`
+  - If you wan't to see where the majority of the important code is, jump to the commit 'application, database, and specs'

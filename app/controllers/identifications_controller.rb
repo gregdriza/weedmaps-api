@@ -38,8 +38,10 @@ class IdentificationsController < ApplicationController
 
   def new
     begin
-      expiration_date = Date.parse(params[:expiration_date])
-      @identification = Identification.create!(state_issuer: params[:state_issuer], id_number: params[:id_number], expiration_date: expiration_date)
+      identification = params['identification']
+
+      expiration_date = Date.parse(identification[:expiration_date])
+      @identification = Identification.create!(state_issuer: identification[:state_issuer], id_number: identification[:id_number], expiration_date: expiration_date)
       render json: @identification, include: []
     rescue => e
       render json: { error: e }, status: 422
