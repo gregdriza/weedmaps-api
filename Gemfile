@@ -16,6 +16,8 @@ gem 'timecop', '~> 0.9.4'
 
 gem "figaro"
 
+gem 'pg'
+
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
