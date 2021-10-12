@@ -8,8 +8,6 @@ class IdentificationsController < ApplicationController
     render json: @identifications, include: []
   end
 
-  ##
-
   def upload
     begin
       identification = Identification.find_by(id: params[:id])
