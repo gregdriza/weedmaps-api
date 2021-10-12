@@ -1,4 +1,4 @@
 
 class Patient < ApplicationRecord
-  has_many :identifications
+  has_many :identifications, :dependent => :destroy
 end

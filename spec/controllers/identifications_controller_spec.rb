@@ -32,7 +32,7 @@ RSpec.describe IdentificationsController, type: :controller do
           "id_number"=>123458574,
           "is_expired"=>false,
           "state_issuer"=>"NY",
-          "id_url"=> 'http://www.test.com/identifications/1/id_image/'
+          "id_url"=> "http://www.test.com/identifications/#{identification_1.id}/id_image/"
         },
         {
           "expiration_date"=>"2021-10-22",
@@ -40,7 +40,7 @@ RSpec.describe IdentificationsController, type: :controller do
           "id_number"=>133557574,
           "is_expired"=>false,
           "state_issuer"=>"NY",
-          "id_url"=>"http://www.test.com/identifications/2/id_image/"
+          "id_url"=>"http://www.test.com/identifications/#{identification_2.id}/id_image/"
         }
       ]
     }
@@ -60,7 +60,7 @@ RSpec.describe IdentificationsController, type: :controller do
         "id_number"=>133557574,
         "is_expired"=>false,
         "state_issuer"=>"NY",
-        "id_url"=>"http://www.test.com/identifications/2/id_image/"
+        "id_url"=>"http://www.test.com/identifications/#{identification_2.id}/id_image/"
       }
     }
 
@@ -99,7 +99,7 @@ RSpec.describe IdentificationsController, type: :controller do
       }
     }
 
-    before { patch :update, params: { id: 1, **payload } }
+    before { patch :update, params: { id: identification_1.id, **payload } }
 
     it "updates the provided fields on the correct record" do
       updated_identification = Identification.find_by(id_number: 987654321)
@@ -108,7 +108,7 @@ RSpec.describe IdentificationsController, type: :controller do
   end
 
   describe "DELETE delete" do
-    before { delete :delete, params: { id: 1 } }
+    before { delete :delete, params: { id: identification_1.id } }
 
     it "updates the provided fields on the correct record" do
       deleted_identification = Identification.find_by(id_number: 987654321)
@@ -139,11 +139,11 @@ RSpec.describe IdentificationsController, type: :controller do
       it "returns the url" do
         expect(JSON.parse(response.body)).to eq({
           "expiration_date" => "2021-10-22",
-          "id" => 1,
+          "id" => identification_1.id,
           "id_number" => 123458574,
-          "id_url" => "http://www.test.com/identifications/1/id_image/",
+          "id_url" => "http://www.test.com/identifications/#{identification_1.id}/id_image/",
           "is_expired" => false,
-          "patient" => {"date_of_birth"=>"1994-10-22", "email"=>"Bloe@Jogan.biz", "id"=>1, "name"=>"Bloe Jogan"},
+          "patient" => {"date_of_birth"=>"1994-10-22", "email"=>"Bloe@Jogan.biz", "id"=>patient_1.id, "name"=>"Bloe Jogan"},
           "state_issuer" => "NY"
         })
       end

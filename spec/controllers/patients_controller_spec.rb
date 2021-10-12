@@ -36,7 +36,7 @@ RSpec.describe PatientsController, type: :controller do
             "id"=>identification_1.id,
             "id_number"=>123458574,
             "is_expired"=>false,
-            "id_url"=> "http://www.test.com/identifications/1/id_image/",
+            "id_url"=> "http://www.test.com/identifications/#{identification_1.id}/id_image/",
             "state_issuer"=>"NY"}]
         },
         {
@@ -49,7 +49,7 @@ RSpec.describe PatientsController, type: :controller do
             "id"=>identification_2.id,
             "id_number"=>133557574,
             "is_expired"=>false,
-            "id_url"=> "http://www.test.com/identifications/2/id_image/",
+            "id_url"=> "http://www.test.com/identifications/#{identification_2.id}/id_image/",
             "state_issuer"=>"NY"}]
         }
       ]
@@ -74,7 +74,7 @@ RSpec.describe PatientsController, type: :controller do
           "id"=>identification_2.id,
           "id_number"=>133557574,
           "is_expired"=>false,
-          "id_url"=> "http://www.test.com/identifications/2/id_image/",
+          "id_url"=> "http://www.test.com/identifications/#{identification_2.id}/id_image/",
           "state_issuer"=>"NY"}]
       }
     }
@@ -145,7 +145,7 @@ RSpec.describe PatientsController, type: :controller do
       }
     }
 
-    before { patch :update, params: { id: 1, **payload } }
+    before { patch :update, params: { id: identification_1.id, **payload } }
   
     it 'updates the provided fields on the correct record' do
       updated_patient = Patient.find_by(name: "Droe Gliden")
@@ -154,7 +154,7 @@ RSpec.describe PatientsController, type: :controller do
   end
 
   describe "DELETE delete" do
-    before { delete :delete, params: { id: 1 } }
+    before { delete :delete, params: { id: identification_1.id } }
     it "deletes the record matching the provided id" do
       deleted_patient = Patient.find_by(name: "Bloe Jogan")
       expect(deleted_patient).to be nil

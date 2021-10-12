@@ -1,4 +1,3 @@
-require 'Date'
 require 'securerandom'
 
 class IdentificationsController < ApplicationController

@@ -91,7 +91,7 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     method_source (1.0.0)
-    mini_mime (1.1.1)
+    mini_mime (1.1.2)
     mini_portile2 (2.4.0)
     minitest (5.14.4)
     nio4r (2.5.8)
@@ -198,7 +198,6 @@ GEM
 
 PLATFORMS
   x86_64-darwin-17
-  x86_64-linux
 
 DEPENDENCIES
   active_model_serializers

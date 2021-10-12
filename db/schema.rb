@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 20211010114940) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "identifications", force: :cascade do |t|
     t.integer "id_number"
     t.string "state_issuer"
     t.date "expiration_date"
-    t.integer "patient_id"
+    t.bigint "patient_id"
     t.string "id_url"
     t.index ["patient_id"], name: "index_identifications_on_patient_id"
   end
@@ -27,4 +30,5 @@ ActiveRecord::Schema.define(version: 20211010114940) do
     t.date "date_of_birth"
   end
 
+  add_foreign_key "identifications", "patients"
 end
