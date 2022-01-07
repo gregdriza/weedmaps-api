@@ -8,20 +8,16 @@ class PatientsController < ApplicationController
   end
 
   def new
-    begin
-      patient = params[:patient]
-      if patient[:identifications]
-        response = {
-          patient: create_patient_with_identification(patient, patient[:identifications])
-        } 
+    patient = params[:patient]
+    if patient[:identifications]
+      response = {
+        patient: create_patient_with_identification(patient, patient[:identifications])
+      } 
 
-        render json: response.to_json
-      else
-        @patient = Patient.create(name: patient[:name], email: patient[:email], date_of_birth: patient[:date_of_birth])
-        render json: @patient, include: [:identifications]
-      end
-    rescue => e
-      render json: { error: e }, status: 422
+      render json: response.to_json
+    else
+      @patient = Patient.create(name: patient[:name], email: patient[:email], date_of_birth: patient[:date_of_birth])
+      render json: @patient, include: [:identifications]
     end
   end 
 
@@ -31,25 +27,16 @@ class PatientsController < ApplicationController
   end 
 
   def update
-    begin
-      update_parameters = params[:patient].as_json
-      patient = Patient.find_by(id: params[:id])
-      patient.update_attributes!(update_parameters)
+    update_parameters = params[:patient].as_json
+    patient = Patient.find_by(id: params[:id])
+    patient.update_attributes!(update_parameters)
 
-      render json: patient, include: [:identifications]
-    rescue => e
-      render json: { error: e }, status: 422
-    end
-  end
+    render json: patient, include: [:identifications]
+end
 
   def delete
-    begin
-      @patient = Patient.where(id: params[:id]).first!.destroy!
-      render json: @patient
-    rescue => e
-      puts e
-      render json: { error: "Couldn't find patient" }
-    end
+    @patient = Patient.where(id: params[:id]).first!.destroy!
+    render json: @patient
   end
 
   private 
